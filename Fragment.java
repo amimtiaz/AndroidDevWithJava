@@ -19,8 +19,6 @@
 
 //Fragment class
 
-package com.hussienalrubaye.androiddemowork;
-
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,7 +28,7 @@ import android.widget.Button;
 import android.widget.TimePicker;
 
 /**
- * Created by hussienalrubaye on 9/7/16.
+ * Created by Imtiaz on 26/2/24.
  */
 
 public class PopTime extends DialogFragment implements View.OnClickListener {
