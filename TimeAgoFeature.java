@@ -1,12 +1,9 @@
- holder.timeAgoTextView.setText(timeAgo);
-
-// Method is for implement TimeAgo Feature in android add this method.
-public String covertTimeToText(String dataDate) {
+ public String covertTimeToText(String dataDate) {
 
         String convTime = null;
 
         String prefix = "";
-        String suffix = "Ago";
+        String suffix = "আগে";  // "Ago" in Bengali
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -19,24 +16,24 @@ public String covertTimeToText(String dataDate) {
             long second = TimeUnit.MILLISECONDS.toSeconds(dateDiff);
             long minute = TimeUnit.MILLISECONDS.toMinutes(dateDiff);
             long hour   = TimeUnit.MILLISECONDS.toHours(dateDiff);
-            long day  = TimeUnit.MILLISECONDS.toDays(dateDiff);
+            long day    = TimeUnit.MILLISECONDS.toDays(dateDiff);
 
             if (second < 60) {
-                convTime = second + " Seconds " + suffix;
+                convTime = convertNumberToBengali(second) + " সেকেন্ড " + suffix;
             } else if (minute < 60) {
-                convTime = minute + " Minutes "+suffix;
+                convTime = convertNumberToBengali(minute) + " মিনিট " + suffix;
             } else if (hour < 24) {
-                convTime = hour + " Hours "+suffix;
+                convTime = convertNumberToBengali(hour) + " ঘণ্টা " + suffix;
             } else if (day >= 7) {
                 if (day > 360) {
-                    convTime = (day / 360) + " Years " + suffix;
+                    convTime = convertNumberToBengali(day / 360) + " বছর " + suffix;
                 } else if (day > 30) {
-                    convTime = (day / 30) + " Months " + suffix;
+                    convTime = convertNumberToBengali(day / 30) + " মাস " + suffix;
                 } else {
-                    convTime = (day / 7) + " Week " + suffix;
+                    convTime = convertNumberToBengali(day / 7) + " সপ্তাহ " + suffix;
                 }
             } else if (day < 7) {
-                convTime = day+" Days "+suffix;
+                convTime = convertNumberToBengali(day) + " দিন " + suffix;
             }
 
         } catch (ParseException e) {
@@ -45,4 +42,21 @@ public String covertTimeToText(String dataDate) {
         }
 
         return convTime;
+    }
+
+    // Function to convert English numbers to Bengali numbers
+    private String convertNumberToBengali(long number) {
+        String[] bengaliNumbers = {"০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"};
+        String numberStr = String.valueOf(number);
+        StringBuilder bengaliNumberStr = new StringBuilder();
+
+        for (char c : numberStr.toCharArray()) {
+            if (Character.isDigit(c)) {
+                bengaliNumberStr.append(bengaliNumbers[c - '0']);
+            } else {
+                bengaliNumberStr.append(c);  // In case of any non-digit characters
+            }
+        }
+
+        return bengaliNumberStr.toString();
     }
