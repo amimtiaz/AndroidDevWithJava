@@ -1,4 +1,3 @@
-package com.hussienalrubaye.androiddemowork;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,9 +14,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * Created by hussienalrubaye on 9/8/16.
- */
 
 public class DBManager {
     private SQLiteDatabase sqlDB;
