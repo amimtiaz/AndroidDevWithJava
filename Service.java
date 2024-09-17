@@ -1,9 +1,4 @@
  
-
-/**
- * Created by hussienalrubaye on 10/1/16.
- */
-
 public class LocationService extends Service
 {
    
