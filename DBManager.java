@@ -1,87 +1,76 @@
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-
 public class DBManager {
+
     private SQLiteDatabase sqlDB;
-    static final String DBName="Students";
-    static final String TableName="Logins";
-    static final String ColUserName="UserName";
-    static final String ColPassWord="Password";
-    static final String ColID="ID";
-    static final  int DBVersion=3;
-     // create table Logins(ID integer primary key autoincrment, UserName text, Password text)
-     static final  String CreateTable=" CREATE TABLE IF NOT EXISTS " +TableName+
-             "(ID INTEGER PRIMARY KEY AUTOINCREMENT,"+ ColUserName+
-             " TEXT,"+ ColPassWord + " TEXT);";
+    private static final String DB_NAME = "Students";
+    private static final String TABLE_NAME = "Logins";
+    private static final String COL_USER_NAME = "UserName";
+    private static final String COL_PASSWORD = "Password";
+    private static final String COL_ID = "ID";
+    private static final int DB_VERSION = 3;
 
-   private static class  DatabaseHelperUser extends SQLiteOpenHelper{
-Context context;
-        DatabaseHelperUser(Context context){
-            super(context,DBName,null,DBVersion);
-            this.context=context;
+    // SQL statement to create the Logins table
+    private static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+            "(" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_USER_NAME + " TEXT, " +
+            COL_PASSWORD + " TEXT);";
 
+    // Database helper class
+    private static class DatabaseHelper extends SQLiteOpenHelper {
+        private final Context context;
+
+        DatabaseHelper(Context context) {
+            super(context, DB_NAME, null, DB_VERSION);
+            this.context = context;
         }
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(CreateTable);
-            Toast.makeText(context,"Table is created",Toast.LENGTH_LONG).show();
+            db.execSQL(CREATE_TABLE);
+            Toast.makeText(context, "Table created", Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("Drop table IF  EXISTS "+ TableName);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
         }
     }
 
-
-
-    public DBManager(Context context){
-
-        DatabaseHelperUser db=new DatabaseHelperUser(context) ;
-        sqlDB=db.getWritableDatabase();
-
+    // DBManager constructor
+    public DBManager(Context context) {
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        sqlDB = dbHelper.getWritableDatabase();
     }
 
-    public  long Insert(ContentValues values){
-     long ID=   sqlDB.insert(TableName,"",values);
-        //could insert id is user id, or fail id is or equal 0
-        return ID;
-    }
-    //select username,Password from Logins where ID=1
-    public Cursor query(String[] Projection,String Selection,String[] SelectionArgs,String SortOrder){
-
-        SQLiteQueryBuilder qb= new SQLiteQueryBuilder();
-        qb.setTables(TableName);
-
-        Cursor cursor=qb.query(sqlDB,Projection,Selection,SelectionArgs,null,null,SortOrder);
-        return cursor;
+    // Insert new record into the Logins table
+    public long insert(ContentValues values) {
+        return sqlDB.insert(TABLE_NAME, null, values);
     }
 
-    public int Delete(String Selection,String[] SelectionArgs){
-        int count=sqlDB.delete(TableName,Selection,SelectionArgs);
-        return count;
+    // Query the Logins table
+    public Cursor query(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        qb.setTables(TABLE_NAME);
+        return qb.query(sqlDB, projection, selection, selectionArgs, null, null, sortOrder);
     }
 
-public  int Update(ContentValues values,String Selection,String[] SelectionArgs)
-{
-    int count=sqlDB.update(TableName,values,Selection,SelectionArgs);
-    return count;
+    // Delete records from the Logins table
+    public int delete(String selection, String[] selectionArgs) {
+        return sqlDB.delete(TABLE_NAME, selection, selectionArgs);
+    }
+
+    // Update records in the Logins table
+    public int update(ContentValues values, String selection, String[] selectionArgs) {
+        return sqlDB.update(TABLE_NAME, values, selection, selectionArgs);
+    }
 }
 
-}
+// Imtiaz
