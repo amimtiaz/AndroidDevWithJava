@@ -13,4 +13,4 @@ This repository contains essential Java code for various applications and functi
    ```bash
    git clone <repository-url>
 
-## Feel free to explore my projects and reach out to me at: info.devImtiaz@gmail.com
+# Feel free to explore my projects and reach out to me at: info.devImtiaz@gmail.com
