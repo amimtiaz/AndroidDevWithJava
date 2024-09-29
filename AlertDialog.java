@@ -1,16 +1,13 @@
-  AlertDialog.Builder alert= new AlertDialog.Builder(this);
-        alert.setMessage("are you sure to delete")
-                .setIcon(android.R.drawable.stat_notify_error)
-                .setTitle("Alert")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                      //do some thing  
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                             //do some thing  
-                    }
-                }).show();
+AlertDialog.Builder alert = new AlertDialog.Builder(this);
+alert.setTitle("Alert")
+     .setMessage("Are you sure you want to delete?")
+     .setIcon(android.R.drawable.stat_notify_error)
+     .setPositiveButton("Yes", (dialog, which) -> {
+         // Handle positive action (e.g., deletion)
+     })
+     .setNegativeButton("No", (dialog, which) -> {
+         // Handle negative action (e.g., cancel)
+     })
+     .show();
+
+// Imtiaz
