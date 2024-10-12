@@ -1,3 +1,30 @@
+// library implementation =>>
+ implementation('com.tbuonomo:dotsindicator:5.1.0')
+
+// xml 
+ /*
+ <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dotIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:dotsColor="@color/white"
+            app:dotsSize="10dp"
+            app:dotsSpacing="3dp"
+            app:selectedDotColor="@color/yellow_color"
+            android:orientation="horizontal"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerImageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="16dp"
+            />       
+    */
+
+
+
 // Slider Adapter
 
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
