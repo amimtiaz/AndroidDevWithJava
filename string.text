@@ -1,22 +1,23 @@
-
-1-  lyaout
+//lyaout
 <resources>
     <string name="app_name">localization</string>
     <string name="buhome">Home</string>
     <string name="mgs">Welcome</string>
 
     <string-array name="myarray">
-        <item>name</item>
-        <item>name</item>
-        <item>name</item>
+        <item>name1</item>
+        <item>name2</item>
+        <item>name3</item>
     </string-array>
 </resources>
 
+//code
+// Get the message from resources
+String message = getResources().getString(R.string.mgs);
 
+// Display the message using Toast
+Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
-2- code
+// Get the array from resources
+String[] nameArray = getResources().getStringArray(R.array.myarray);
 
-
-        String msg=getResources().getString(R.string.mgs);
-        Toast.makeText(this,msg,Toast.LENGTH_LONG).show();
-        String[] myarray=getResources().getStringArray(R.array.myarray);
